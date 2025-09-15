@@ -29,13 +29,13 @@ A modern, accessible, and multilingual social support application built with Rea
 - **AI Integration**: OpenAI GPT-3.5-turbo API
 - **Internationalization**: React i18next
 - **Notifications**: React Toastify
-- **Testing**: Vitest, React Testing Library
+- **Build Tool**: Vite
 
 ## 📦 Installation
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/farhatbaig/assessment-reactJS.git
    cd social-support-app
    ```
 
@@ -46,10 +46,10 @@ A modern, accessible, and multilingual social support application built with Rea
 
 3. **Set up environment variables**
    ```bash
-   cp .env.example .env.local
+   cp env.example .env
    ```
    
-   Add your OpenAI API key:
+   Add your OpenAI API key to the `.env` file:
    ```env
    VITE_OPENAI_API_KEY=your_openai_api_key_here
    ```
@@ -100,7 +100,7 @@ src/
 ## 🔧 Configuration
 
 ### Environment Variables
-- `VITE_OPENAI_API_KEY`: Your OpenAI API key for AI assistance
+- `VITE_OPENAI_API_KEY`: OpenAI API key for AI assistance
 
 ### Validation Rules
 - **Personal Info**: Name (2-50 chars), National ID (13 digits), Age (18-120), etc.
@@ -114,18 +114,6 @@ src/
 - **Timeout**: 30 seconds
 - **Retry Logic**: 3 attempts with exponential backoff
 
-## 🧪 Testing
-
-```bash
-# Run unit tests
-npm run test
-
-# Run tests in watch mode
-npm run test:watch
-
-# Run tests with coverage
-npm run test:coverage
-```
 
 ## 🚀 Deployment
 
@@ -139,11 +127,7 @@ npm run build
 npm run preview
 ```
 
-### Deploy to Vercel
-```bash
-npm install -g vercel
-vercel --prod
-```
+
 
 ## ♿ Accessibility Features
 
@@ -165,12 +149,13 @@ vercel --prod
 2. Add language configuration in `src/utils/i18n.ts`
 3. Update language switcher component
 
-## 🔒 Security Considerations
+## 🔒 Security Features
 
-- **API Key Protection**: Environment variable configuration
-- **Input Validation**: Comprehensive client-side validation
+- **Environment Variables**: Secure API key management with `.env` files
+- **Input Validation**: Comprehensive client-side and server-side validation
 - **XSS Prevention**: React's built-in XSS protection
 - **CSRF Protection**: Same-origin policy compliance
+- **Git Security**: `.env` files properly excluded from version control
 
 ## 📱 Mobile Optimization
 
@@ -193,6 +178,7 @@ vercel --prod
 - **Font Sizes**: Responsive scale (text-xs to text-4xl)
 - **Font Weights**: 400 (normal), 500 (medium), 600 (semibold), 700 (bold)
 
+
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -211,4 +197,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - React team for the amazing framework
 - Tailwind CSS for the utility-first CSS framework
 - React Hook Form for efficient form handling
-- React i18next for internationalization support# assessment-reactJS
+- React i18next for internationalization support
