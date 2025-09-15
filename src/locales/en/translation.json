@@ -1,0 +1,109 @@
+{
+  "app": {
+    "title": "Social Support Application",
+    "subtitle": "Apply for Financial Assistance"
+  },
+  "steps": {
+    "step1": "Personal Information",
+    "step2": "Family & Financial Info",
+    "step3": "Situation Descriptions"
+  },
+  "form": {
+    "personalInfo": {
+      "name": "Full Name",
+      "nationalId": "National ID",
+      "dateOfBirth": "Date of Birth",
+      "gender": "Gender",
+      "address": "Address",
+      "city": "City",
+      "state": "State",
+      "country": "Country",
+      "phone": "Phone Number",
+      "email": "Email Address",
+      "description": "Please provide your personal information"
+    },
+    "familyFinancial": {
+      "maritalStatus": "Marital Status",
+      "dependents": "Number of Dependents",
+      "employmentStatus": "Employment Status",
+      "monthlyIncome": "Monthly Income",
+      "housingStatus": "Housing Status",
+      "description": "Please provide your family and financial information"
+    },
+    "situationDescriptions": {
+      "financialSituation": "Current Financial Situation",
+      "employmentCircumstances": "Employment Circumstances",
+      "reasonForApplying": "Reason for Applying",
+      "helpMeWrite": "Help Me Write",
+      "description": "Please describe your current situation in detail"
+    }
+  },
+  "buttons": {
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Submit Application",
+    "submitting": "Submitting...",
+    "save": "Save Progress",
+    "accept": "Accept",
+    "edit": "Edit",
+    "discard": "Discard",
+    "close": "Close",
+    "retry": "Retry",
+    "cancelEdit": "Cancel Edit",
+    "closeError": "Close error message",
+    "nextDescription": "Proceed to next step",
+    "previousDescription": "Go back to previous step",
+    "submitDescription": "Submit your application",
+    "saveDescription": "Save your progress"
+  },
+  "validation": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "phone": "Please enter a valid phone number",
+    "nationalId": "Please enter a valid National ID"
+  },
+  "ai": {
+    "generating": "Generating suggestion...",
+    "error": "Failed to generate suggestion. Please try again.",
+    "timeout": "Request timed out. Please try again.",
+    "suggestion": "AI Suggestion",
+    "assistanceTitle": "AI Writing Assistant",
+    "assistanceDescription": "Get help writing your responses with AI-powered suggestions",
+    "helpMeWrite": "Help me write for {{field}}",
+    "editPlaceholder": "Edit the AI suggestion...",
+    "editLabel": "Edit AI suggestion"
+  },
+  "success": {
+    "title": "Success!",
+    "applicationSubmitted": "Your application has been submitted successfully. You will receive a confirmation email shortly.",
+    "progressSaved": "Progress saved successfully!"
+  },
+  "errors": {
+    "submissionTitle": "Submission Failed",
+    "submissionFailed": "There was an error submitting your application. Please try again or contact support if the problem persists."
+  },
+  "gender": {
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
+  },
+  "maritalStatus": {
+    "single": "Single",
+    "married": "Married",
+    "divorced": "Divorced",
+    "widowed": "Widowed"
+  },
+  "employmentStatus": {
+    "employed": "Employed",
+    "unemployed": "Unemployed",
+    "selfEmployed": "Self-Employed",
+    "retired": "Retired",
+    "student": "Student"
+  },
+  "housingStatus": {
+    "owned": "Owned",
+    "rented": "Rented",
+    "livingWithFamily": "Living with Family",
+    "homeless": "Homeless"
+  }
+}

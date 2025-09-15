@@ -1,0 +1,94 @@
+{
+  "app": {
+    "title": "طلب المساعدة الاجتماعية",
+    "subtitle": "تقدم بطلب للحصول على المساعدة المالية"
+  },
+  "steps": {
+    "step1": "المعلومات الشخصية",
+    "step2": "معلومات الأسرة والمالية",
+    "step3": "وصف الوضع"
+  },
+  "form": {
+    "personalInfo": {
+      "name": "الاسم الكامل",
+      "nationalId": "رقم الهوية الوطنية",
+      "dateOfBirth": "تاريخ الميلاد",
+      "gender": "الجنس",
+      "address": "العنوان",
+      "city": "المدينة",
+      "state": "الولاية",
+      "country": "البلد",
+      "phone": "رقم الهاتف",
+      "email": "عنوان البريد الإلكتروني"
+    },
+    "familyFinancial": {
+      "maritalStatus": "الحالة الاجتماعية",
+      "dependents": "عدد المعالين",
+      "employmentStatus": "حالة التوظيف",
+      "monthlyIncome": "الدخل الشهري",
+      "housingStatus": "حالة السكن"
+    },
+    "situationDescriptions": {
+      "financialSituation": "الوضع المالي الحالي",
+      "employmentCircumstances": "ظروف التوظيف",
+      "reasonForApplying": "سبب التقديم",
+      "helpMeWrite": "ساعدني في الكتابة"
+    }
+  },
+  "buttons": {
+    "next": "التالي",
+    "previous": "السابق",
+    "submit": "إرسال الطلب",
+    "submitting": "جاري الإرسال...",
+    "save": "حفظ التقدم",
+    "accept": "قبول",
+    "edit": "تعديل",
+    "discard": "تجاهل",
+    "close": "إغلاق"
+  },
+  "validation": {
+    "required": "هذا الحقل مطلوب",
+    "email": "يرجى إدخال عنوان بريد إلكتروني صحيح",
+    "phone": "يرجى إدخال رقم هاتف صحيح",
+    "nationalId": "يرجى إدخال رقم هوية وطنية صحيح"
+  },
+  "ai": {
+    "generating": "جاري إنشاء الاقتراح...",
+    "error": "فشل في إنشاء الاقتراح. يرجى المحاولة مرة أخرى.",
+    "timeout": "انتهت مهلة الطلب. يرجى المحاولة مرة أخرى.",
+    "suggestion": "اقتراح الذكاء الاصطناعي"
+  },
+  "success": {
+    "title": "نجح!",
+    "applicationSubmitted": "تم إرسال طلبك بنجاح. ستتلقى رسالة تأكيد بالبريد الإلكتروني قريباً.",
+    "progressSaved": "تم حفظ التقدم بنجاح!"
+  },
+  "errors": {
+    "submissionTitle": "فشل الإرسال",
+    "submissionFailed": "حدث خطأ في إرسال طلبك. يرجى المحاولة مرة أخرى أو الاتصال بالدعم إذا استمرت المشكلة."
+  },
+  "gender": {
+    "male": "ذكر",
+    "female": "أنثى",
+    "other": "آخر"
+  },
+  "maritalStatus": {
+    "single": "أعزب",
+    "married": "متزوج",
+    "divorced": "مطلق",
+    "widowed": "أرمل"
+  },
+  "employmentStatus": {
+    "employed": "موظف",
+    "unemployed": "عاطل عن العمل",
+    "selfEmployed": "يعمل لحسابه الخاص",
+    "retired": "متقاعد",
+    "student": "طالب"
+  },
+  "housingStatus": {
+    "owned": "ملك",
+    "rented": "مستأجر",
+    "livingWithFamily": "يعيش مع العائلة",
+    "homeless": "بلا مأوى"
+  }
+}
