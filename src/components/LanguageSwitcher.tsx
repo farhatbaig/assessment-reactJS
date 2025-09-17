@@ -1,18 +1,7 @@
 import React from 'react';
-import { Button } from './UI/index';
+import { Button } from './ui/index';
 import { useLanguageSwitcher } from '../hooks/useInternationalization';
 
-/**
- * Language Switcher Component
- * 
- * This component provides language switching functionality:
- * - Toggle between English and Arabic
- * - Visual indication of current language
- * - RTL-aware positioning
- * - Accessibility features
- * 
- * @component
- */
 export const LanguageSwitcher: React.FC = () => {
   const { switchLanguage, getCurrentLanguage, isRTL, availableLanguages } = useLanguageSwitcher();
 

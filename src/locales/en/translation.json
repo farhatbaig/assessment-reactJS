@@ -26,7 +26,7 @@
       "maritalStatus": "Marital Status",
       "dependents": "Number of Dependents",
       "employmentStatus": "Employment Status",
-      "monthlyIncome": "Monthly Income",
+      "monthlyIncome": "Monthly Income (AED)",
       "housingStatus": "Housing Status",
       "description": "Please provide your family and financial information"
     },
@@ -35,6 +35,8 @@
       "employmentCircumstances": "Employment Circumstances",
       "reasonForApplying": "Reason for Applying",
       "helpMeWrite": "Help Me Write",
+      "pleaseDescribe": "Please describe",
+      "userPrompt": "Enter your description or request here...",
       "description": "Please describe your current situation in detail"
     }
   },
@@ -69,9 +71,11 @@
     "suggestion": "AI Suggestion",
     "assistanceTitle": "AI Writing Assistant",
     "assistanceDescription": "Get help writing your responses with AI-powered suggestions",
-    "helpMeWrite": "Help me write for {{field}}",
+    "helpMeWrite": "Help Me Write",
     "editPlaceholder": "Edit the AI suggestion...",
-    "editLabel": "Edit AI suggestion"
+    "editLabel": "Edit AI suggestion",
+    "improvingText": "Improving your text for {field}...",
+    "generatingSuggestion": "Generating suggestion for {field}..."
   },
   "success": {
     "title": "Success!",
@@ -105,5 +109,13 @@
     "rented": "Rented",
     "livingWithFamily": "Living with Family",
     "homeless": "Homeless"
+  },
+  "country": {
+    "us": "United States",
+    "uk": "United Kingdom",
+    "ca": "Canada",
+    "ae": "United Arab Emirates",
+    "pk": "Pakistan",
+    "in": "India"
   }
 }

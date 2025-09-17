@@ -4,7 +4,7 @@ import { FormWizard } from './components/FormWizard.tsx';
 import { LanguageSwitcher } from './components/LanguageSwitcher.tsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './utils/i18n'; // Initialize i18n
+import './utils/i18n';
 
 const App: React.FC = () => {
   return (

@@ -19,20 +19,25 @@
       "state": "الولاية",
       "country": "البلد",
       "phone": "رقم الهاتف",
-      "email": "عنوان البريد الإلكتروني"
+      "email": "عنوان البريد الإلكتروني",
+      "description": "يرجى إدخال المعلومات الشخصية"
     },
     "familyFinancial": {
       "maritalStatus": "الحالة الاجتماعية",
       "dependents": "عدد المعالين",
       "employmentStatus": "حالة التوظيف",
-      "monthlyIncome": "الدخل الشهري",
-      "housingStatus": "حالة السكن"
+      "monthlyIncome": "الدخل الشهري (AED)",
+      "housingStatus": "حالة السكن",
+      "description": "يرجى إدخال المعلومات الأسرة والمالية"
     },
     "situationDescriptions": {
       "financialSituation": "الوضع المالي الحالي",
       "employmentCircumstances": "ظروف التوظيف",
       "reasonForApplying": "سبب التقديم",
-      "helpMeWrite": "ساعدني في الكتابة"
+      "helpMeWrite": "ساعدني في الكتابة",
+      "pleaseDescribe": "يرجى وصف",
+      "userPrompt": "أدخل وصفك أو طلبك هنا...",
+      "description": "يرجى إدخال الوضع المالي الحالي وظروف التوظيف وسبب التقديم"
     }
   },
   "buttons": {
@@ -44,7 +49,9 @@
     "accept": "قبول",
     "edit": "تعديل",
     "discard": "تجاهل",
-    "close": "إغلاق"
+    "close": "إغلاق",
+    "retry": "إعادة المحاولة",
+    "cancelEdit": "إلغاء التعديل"
   },
   "validation": {
     "required": "هذا الحقل مطلوب",
@@ -56,7 +63,11 @@
     "generating": "جاري إنشاء الاقتراح...",
     "error": "فشل في إنشاء الاقتراح. يرجى المحاولة مرة أخرى.",
     "timeout": "انتهت مهلة الطلب. يرجى المحاولة مرة أخرى.",
-    "suggestion": "اقتراح الذكاء الاصطناعي"
+    "suggestion": "اقتراح الذكاء الاصطناعي",
+    "editPlaceholder": "قم بتعديل النص هنا...",
+    "editLabel": "تعديل الاقتراح",
+    "improvingText": "تحسين نصك لـ {field}...",
+    "generatingSuggestion": "إنشاء اقتراح لـ {field}..."
   },
   "success": {
     "title": "نجح!",
@@ -90,5 +101,13 @@
     "rented": "مستأجر",
     "livingWithFamily": "يعيش مع العائلة",
     "homeless": "بلا مأوى"
+  },
+  "country": {
+    "us": "الولايات المتحدة",
+    "uk": "المملكة المتحدة",
+    "ca": "كندا",
+    "ae": "الإمارة العربية المتحدة",
+    "pk": "باكستان",
+    "in": "الهند"
   }
 }

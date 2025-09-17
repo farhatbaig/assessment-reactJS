@@ -16,7 +16,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({
   ...props
 }, ref) => {
   const textareaClasses = cn(
-    'form-input',
+    'form-input min-h-[120px] resize-y',
     error && 'border-red-300 focus:border-red-500 focus:ring-red-500',
     className
   );
@@ -48,3 +48,4 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(({
 });
 
 Textarea.displayName = 'Textarea';
+

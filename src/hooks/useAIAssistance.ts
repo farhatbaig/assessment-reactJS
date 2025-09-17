@@ -55,10 +55,12 @@ export const useAIAssistanceDialog = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentField, setCurrentField] = useState<string | null>(null);
   const [currentValue, setCurrentValue] = useState<string>('');
+  const [preGeneratedSuggestion, setPreGeneratedSuggestion] = useState<string>('');
 
-  const openDialog = useCallback((fieldType: string, value: string = '') => {
+  const openDialog = useCallback((fieldType: string, value: string = '', suggestion: string = '') => {
     setCurrentField(fieldType);
     setCurrentValue(value);
+    setPreGeneratedSuggestion(suggestion);
     setIsOpen(true);
   }, []);
 
@@ -66,12 +68,14 @@ export const useAIAssistanceDialog = () => {
     setIsOpen(false);
     setCurrentField(null);
     setCurrentValue('');
+    setPreGeneratedSuggestion('');
   }, []);
 
   return {
     isOpen,
     currentField,
     currentValue,
+    preGeneratedSuggestion,
     openDialog,
     closeDialog
   };

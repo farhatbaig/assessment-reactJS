@@ -38,27 +38,20 @@ export const saveFormData = (data: string): void => {
 
 export const clearFormData = (): void => {
   try {
-    console.log('Starting localStorage clear process...');
-    
     setResettingFlag(true);
     
     localStorage.removeItem(STORAGE_KEY);
-    console.log('Method 1: removeItem completed');
     
     if (localStorage.getItem(STORAGE_KEY)) {
-      console.log('Data still exists, using localStorage.clear()');
       localStorage.clear();
     }
     
     localStorage.setItem(STORAGE_KEY, '');
     localStorage.removeItem(STORAGE_KEY);
-    console.log('Method 3: empty string method completed');
     
     const remaining = localStorage.getItem(STORAGE_KEY);
     if (remaining) {
-      console.warn('localStorage still contains data after clearing:', remaining);
       localStorage.clear();
-      console.log('Used localStorage.clear() as last resort');
     }
     
     for (let i = 0; i < 5; i++) {
@@ -68,18 +61,13 @@ export const clearFormData = (): void => {
       }
     }
     
-    console.log('Form data cleared from localStorage successfully');
-    
     setTimeout(() => {
       setResettingFlag(false);
-      console.log('Reset flag cleared');
     }, 1000);
     
   } catch (error) {
-    console.error('Error clearing localStorage:', error);
     try {
       localStorage.clear();
-      console.log('Fallback: localStorage.clear() executed');
     } catch (clearError) {
       console.error('Failed to clear localStorage completely:', clearError);
     }
@@ -88,20 +76,14 @@ export const clearFormData = (): void => {
 
 export const nuclearClearFormData = (): void => {
   try {
-    console.log('🚀 NUCLEAR OPTION: Complete localStorage clear');
-    
     setResettingFlag(true);
     
     localStorage.clear();
-    console.log('localStorage.clear() executed');
     
     setTimeout(() => {
       const remaining = localStorage.getItem(STORAGE_KEY);
       if (remaining) {
-        console.error('❌ Data still exists after nuclear clear:', remaining);
         localStorage.clear();
-      } else {
-        console.log('✅ Nuclear clear successful - no data remaining');
       }
     }, 100);
     

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from './UI/index';
+import { Button } from './ui/index';
 import { useFormStep } from '../hooks/useFormStep';
 import { useFormContext } from '../contexts/FormContext';
 

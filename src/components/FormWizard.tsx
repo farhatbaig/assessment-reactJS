@@ -5,7 +5,7 @@ import { ProgressStepper } from './ProgressStepper';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
 import { FamilyFinancialStep } from './steps/FamilyFinancialStep';
 import { SituationDescriptionsStep } from './steps/SituationDescriptionsStep';
-import { Alert } from './UI/index';
+import { Alert } from './ui/index';
 
 export const FormWizard: React.FC = () => {
   const { t } = useTranslation();

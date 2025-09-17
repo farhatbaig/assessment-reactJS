@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Alert } from './UI/index';
+import { Button, Alert } from './ui/index';
 import { useAIAssistance } from '../hooks/useAIAssistance';
 
 interface AIAssistanceDialogProps {
@@ -9,6 +9,7 @@ interface AIAssistanceDialogProps {
   fieldType: string;
   currentValue: string;
   onAccept: (value: string) => void;
+  preGeneratedSuggestion?: string;
 }
 
 export const AIAssistanceDialog: React.FC<AIAssistanceDialogProps> = ({
@@ -16,20 +17,29 @@ export const AIAssistanceDialog: React.FC<AIAssistanceDialogProps> = ({
   onClose,
   fieldType,
   currentValue,
-  onAccept
+  onAccept,
+  preGeneratedSuggestion
 }) => {
   const { t } = useTranslation();
-  const { isGenerating, error, generateSuggestion, clearError, isReady } = useAIAssistance();
+  const { isGenerating, error, generateSuggestion, clearError } = useAIAssistance();
   
   const [suggestion, setSuggestion] = useState<string>('');
   const [editedSuggestion, setEditedSuggestion] = useState<string>('');
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   useEffect(() => {
-    if (isOpen && fieldType && isReady) {
-      generateSuggestionForField();
+    if (isOpen) {
+      if (preGeneratedSuggestion) {
+        setSuggestion(preGeneratedSuggestion);
+        setEditedSuggestion(preGeneratedSuggestion);
+        setIsEditing(false);
+      } else {
+        setSuggestion('');
+        setEditedSuggestion('');
+        setIsEditing(false);
+      }
     }
-  }, [isOpen, fieldType, isReady]);
+  }, [isOpen, fieldType, preGeneratedSuggestion]);
 
   useEffect(() => {
     if (isOpen) {
@@ -42,8 +52,27 @@ export const AIAssistanceDialog: React.FC<AIAssistanceDialogProps> = ({
 
   const generateSuggestionForField = async (): Promise<void> => {
     try {
-      const context = currentValue ? `Current text: ${currentValue}` : '';
+      let context = '';
+      
+      console.log('AI Dialog - currentValue:', currentValue);
+      console.log('AI Dialog - fieldType:', fieldType);
+      
+      if (currentValue && currentValue.trim()) {
+        context = currentValue;
+        console.log('Using user textarea input as context:', context);
+      } else {
+        const fieldLabels: Record<string, string> = {
+          financialSituation: 'Current Financial Situation',
+          employmentCircumstances: 'Employment Circumstances',
+          reasonForApplying: 'Reason for Applying'
+        };
+        context = fieldLabels[fieldType] || fieldType;
+        console.log('Using field label as context:', context);
+      }
+      
+      console.log('Generating suggestion for field:', fieldType, 'with context:', context);
       const generatedText = await generateSuggestion(fieldType, context);
+      console.log('Generated text:', generatedText);
       setSuggestion(generatedText);
       setEditedSuggestion(generatedText);
     } catch (err) {
@@ -153,6 +182,27 @@ export const AIAssistanceDialog: React.FC<AIAssistanceDialogProps> = ({
               </Alert>
             )}
 
+            {!suggestion && !isGenerating && (
+              <div className="space-y-4">
+                <div className="p-4 bg-blue-50 rounded-lg">
+                  <p className="text-sm text-blue-800 mb-4">
+                    {currentValue && currentValue.trim() 
+                      ? `Improving your text for ${t(`form.situationDescriptions.${fieldType}`)}...`
+                      : `Generating suggestion for ${t(`form.situationDescriptions.${fieldType}`)}...`
+                    }
+                  </p>
+                  <Button
+                    onClick={generateSuggestionForField}
+                    className="w-full"
+                    loading={isGenerating}
+                    disabled={isGenerating}
+                  >
+                    {isGenerating ? t('ai.generating') : t('form.situationDescriptions.helpMeWrite')}
+                  </Button>
+                </div>
+              </div>
+            )}
+
             {suggestion && !isGenerating && (
               <div className="space-y-4">
                 {!isEditing ? (
@@ -165,8 +215,7 @@ export const AIAssistanceDialog: React.FC<AIAssistanceDialogProps> = ({
                   <textarea
                     value={editedSuggestion}
                     onChange={(e) => setEditedSuggestion(e.target.value)}
-                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    rows={6}
+                    className="w-full p-4 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 min-h-[120px] resize-y"
                     placeholder={t('ai.editPlaceholder')}
                     aria-label={t('ai.editLabel')}
                   />

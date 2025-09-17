@@ -20,6 +20,15 @@ export const FORM_OPTIONS = {
     { value: 'retired', labelKey: 'employmentStatus.retired' },
     { value: 'selfEmployed', labelKey: 'employmentStatus.selfEmployed' }
   ],
+
+  COUNTRY_OPTIONS: [
+    { value: 'us', labelKey: 'country.us' },
+    { value: 'uk', labelKey: 'country.uk' },
+    { value: 'ca', labelKey: 'country.ca' },
+    { value: 'ae', labelKey: 'country.ae' },
+    { value: 'pk', labelKey: 'country.pk' },
+    { value: 'in', labelKey: 'country.in' }
+  ],
   
   HOUSING_STATUS: [
     { value: 'owned', labelKey: 'housingStatus.owned' },

@@ -1,13 +1,14 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFormContext } from '../../contexts/FormContext';
-import { Textarea, Button } from '../UI/index';
+import { Textarea, Button } from '../ui/index';
 import { AIAssistanceDialog } from '../AIAssistanceDialog';
 import { situationDescriptionsSchema } from '../../utils/validationSchemas';
 import apiService from '../../services/apiService';
 import { StepProps } from '../../types/form';
 import { useFormStep } from '../../hooks/useFormStep';
 import { useAIAssistanceDialog } from '../../hooks/useAIAssistance';
+import aiService from '../../services/aiService';
 import { showSuccess, showError } from '../../utils/notifications';
 import { directClearLocalStorage } from '../../services/localStorageService';
 import { resetAllFormFields } from '../../utils/formReset';
@@ -20,7 +21,7 @@ interface SituationDescriptionsStepProps extends StepProps {
 export const SituationDescriptionsStep: React.FC<SituationDescriptionsStepProps> = ({ onPrevious, onSubmit }) => {
   const { t } = useTranslation();
   const { formData, updateFormData, setLoading, resetForm, isLoading } = useFormContext();
-  const { isOpen, currentField, currentValue, openDialog, closeDialog } = useAIAssistanceDialog();
+  const { isOpen, currentField, currentValue, preGeneratedSuggestion, openDialog, closeDialog } = useAIAssistanceDialog();
 
   const {
     register,
@@ -91,13 +92,42 @@ export const SituationDescriptionsStep: React.FC<SituationDescriptionsStepProps>
     }
   };
 
-  const handleAIAssistance = (fieldName: string) => {
-    openDialog(fieldName, formValues[fieldName as keyof typeof formValues] || '');
+  const handleAIAssistance = async (fieldName: string) => {
+    const currentValue = formValues[fieldName as keyof typeof formValues] || '';
+    console.log('Generating AI suggestion for field:', fieldName, 'with current value:', currentValue);
+    
+    try {
+      // Determine context based on whether textarea has content
+      let context = '';
+      if (currentValue && currentValue.trim()) {
+        // Use the actual textarea input
+        context = currentValue;
+      } else {
+        // Use the field label when textarea is empty
+        const fieldLabels: Record<string, string> = {
+          financialSituation: 'Current Financial Situation',
+          employmentCircumstances: 'Employment Circumstances',
+          reasonForApplying: 'Reason for Applying'
+        };
+        context = fieldLabels[fieldName] || fieldName;
+      }
+      
+      console.log('Generating suggestion with context:', context);
+      const suggestion = await aiService.generateSuggestion(fieldName, context);
+      console.log('Generated suggestion:', suggestion);
+      
+      // Open dialog with the generated suggestion
+      openDialog(fieldName, currentValue, suggestion);
+    } catch (error) {
+      console.error('Failed to generate AI suggestion:', error);
+      showError('Failed to generate AI suggestion. Please try again.');
+    }
   };
 
   const applySuggestion = (fieldName: string, suggestion: string) => {
     setValue(fieldName as keyof typeof formValues, suggestion, { shouldValidate: true, shouldDirty: true });
     closeDialog();
+    showSuccess('AI suggestion applied successfully!');
   };
 
   return (
@@ -127,7 +157,7 @@ export const SituationDescriptionsStep: React.FC<SituationDescriptionsStepProps>
               onClick={() => handleAIAssistance('financialSituation')}
               className="mt-2"
             >
-              {t('ai.helpMeWrite', { field: t('form.situationDescriptions.financialSituation') })}
+              {t('form.situationDescriptions.helpMeWrite')}
             </Button>
           </div>
 
@@ -145,7 +175,7 @@ export const SituationDescriptionsStep: React.FC<SituationDescriptionsStepProps>
               onClick={() => handleAIAssistance('employmentCircumstances')}
               className="mt-2"
             >
-              {t('ai.helpMeWrite', { field: t('form.situationDescriptions.employmentCircumstances') })}
+              {t('form.situationDescriptions.helpMeWrite')}
             </Button>
           </div>
 
@@ -163,7 +193,7 @@ export const SituationDescriptionsStep: React.FC<SituationDescriptionsStepProps>
               onClick={() => handleAIAssistance('reasonForApplying')}
               className="mt-2"
             >
-              {t('ai.helpMeWrite', { field: t('form.situationDescriptions.reasonForApplying') })}
+              {t('form.situationDescriptions.helpMeWrite')}
             </Button>
           </div>
         </div>
@@ -223,6 +253,7 @@ export const SituationDescriptionsStep: React.FC<SituationDescriptionsStepProps>
           currentValue={currentValue}
           onAccept={(suggestion: string) => applySuggestion(currentField || '', suggestion)}
           fieldType={currentField || ''}
+          preGeneratedSuggestion={preGeneratedSuggestion}
         />
       )}
     </>

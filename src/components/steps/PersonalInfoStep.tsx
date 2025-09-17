@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFormContext } from '../../contexts/FormContext';
-import { Input, Select } from '../UI/index';
+import { Input, Select } from '../ui/index';
 import { BaseFormStep } from '../BaseFormStep';
 import { personalInfoSchema } from '../../utils/validationSchemas';
 import { StepProps } from '../../types/form';
@@ -41,7 +41,7 @@ export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ onNext }) =>
   };
 
   const genderOptions = getTranslatedOptions(FORM_OPTIONS.GENDER, t);
-
+  const countryOptions = getTranslatedOptions(FORM_OPTIONS.COUNTRY_OPTIONS, t);
   return (
     <BaseFormStep
       stepNumber={1}
@@ -107,12 +107,15 @@ export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ onNext }) =>
             {...register('state')}
           />
 
-          <Input
+          <Select 
             label={t('form.personalInfo.country')}
+            name='country'
+            options={countryOptions}
             error={errors.country?.message}
             required
             {...register('country')}
           />
+
 
           <Input
             type="tel"

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useFormContext } from '../../contexts/FormContext';
-import { Input, Select, Button } from '../UI/index';
+import { Input, Select, Button } from '../ui/index';
 import { familyFinancialSchema } from '../../utils/validationSchemas';
 import { StepProps } from '../../types/form';
 import { useFormStep } from '../../hooks/useFormStep';
@@ -34,7 +34,6 @@ export const FamilyFinancialStep: React.FC<FamilyFinancialStepProps> = ({ onNext
 
   const formValues = watch();
 
-  // Simple validation
   const isFormValid = isValid && 
     formValues.maritalStatus &&
     formValues.employmentStatus &&
@@ -72,7 +71,6 @@ export const FamilyFinancialStep: React.FC<FamilyFinancialStepProps> = ({ onNext
     { value: 'livingWithFamily', label: t('housingStatus.livingWithFamily') },
     { value: 'homeless', label: t('housingStatus.homeless') }
   ];
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <header className="mb-6">

@@ -56,8 +56,7 @@ export const personalInfoSchema = yup.object().shape({
   
   country: yup
     .string()
-    .min(VALIDATION_LIMITS.COUNTRY_MIN, VALIDATION_MESSAGES.MIN_LENGTH(VALIDATION_LIMITS.COUNTRY_MIN))
-    .max(VALIDATION_LIMITS.COUNTRY_MAX, VALIDATION_MESSAGES.MAX_LENGTH(VALIDATION_LIMITS.COUNTRY_MAX))
+    .oneOf(['ae', 'us', 'pk' , 'uk', 'ca', 'in'], 'Please select a valid country')
     .required(VALIDATION_MESSAGES.REQUIRED),
   
   phone: yup

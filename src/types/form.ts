@@ -1,4 +1,3 @@
-// Form data types
 export interface PersonalInfo {
   name: string;
   nationalId: string;
@@ -27,7 +26,6 @@ export interface SituationDescriptions {
 }
 
 export interface FormData {
-  // Step 1: Personal Information
   name: string;
   nationalId: string;
   dateOfBirth: string;
@@ -39,14 +37,12 @@ export interface FormData {
   phone: string;
   email: string;
   
-  // Step 2: Family & Financial Info
   maritalStatus: string;
   dependents: number;
   employmentStatus: string;
   monthlyIncome: string;
   housingStatus: string;
   
-  // Step 3: Situation Descriptions
   financialSituation: string;
   employmentCircumstances: string;
   reasonForApplying: string;
@@ -58,7 +54,6 @@ export interface SavedFormData {
   timestamp: string;
 }
 
-// Form context types
 export interface FormContextType {
   currentStep: number;
   formData: FormData;
@@ -73,20 +68,17 @@ export interface FormContextType {
   resetForm: () => void;
 }
 
-// Component prop types
 export interface StepProps {
   onNext?: () => void;
   onPrevious?: () => void;
   onSubmit?: () => void;
 }
 
-// Form validation types
 export interface ValidationError {
   field: string;
   message: string;
 }
 
-// AI Service types
 export interface AISuggestion {
   text: string;
   field: string;
@@ -98,7 +90,6 @@ export interface AIServiceResponse {
   error?: string;
 }
 
-// API Service types
 export interface APIResponse {
   success: boolean;
   message?: string;

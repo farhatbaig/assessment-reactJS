@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom base styles */
 @layer base {
   html {
     height: 100%;
@@ -18,18 +17,15 @@
     min-height: 100vh;
   }
   
-  /* RTL Support */
   [dir="rtl"] {
     text-align: right;
   }
   
-  /* Focus styles for accessibility */
   *:focus {
     outline: none;
     box-shadow: 0 0 0 2px #3b82f6, 0 0 0 4px rgba(59, 130, 246, 0.1);
   }
   
-  /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
   }
@@ -48,7 +44,6 @@
   }
 }
 
-/* Custom component styles */
 @layer components {
   .btn-primary {
     @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2;
@@ -95,7 +90,6 @@
   }
 }
 
-/* Utility classes */
 @layer utilities {
   .text-balance {
     text-wrap: balance;

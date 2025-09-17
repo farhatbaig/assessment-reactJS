@@ -30,15 +30,15 @@ class AIService {
   private minRequestInterval: number;
 
   constructor() {
-    this.apiKey = import.meta.env.VITE_OPENAI_API_KEY;
-    this.baseURL = 'https://api.openai.com/v1/chat/completions';
-    this.model = 'gpt-3.5-turbo';
-    this.timeout = 30000;
-    this.maxRetries = 3;
-    this.retryDelay = 1000;
-    this.requestCache = {};
-    this.lastRequestTime = 0;
-    this.minRequestInterval = 2000; // 2 seconds between requests
+  this.apiKey = import.meta.env.VITE_OPENAI_API_KEY;
+  this.baseURL = 'https://api.openai.com/v1/chat/completions';
+  this.model = 'gpt-3.5-turbo';
+  this.timeout = 30000;
+  this.maxRetries = 3;
+  this.retryDelay = 1000;
+  this.requestCache = {};
+  this.lastRequestTime = 0;
+  this.minRequestInterval = 2000;
   }
 
   async generateSuggestion(fieldType: string, context: string = ''): Promise<string> {
@@ -46,15 +46,19 @@ class AIService {
       throw new Error('OpenAI API key is not configured');
     }
 
+    console.log('AI Service - generateSuggestion called with:', { fieldType, context });
+
     const cacheKey = this.getCacheKey(fieldType, context);
     const cachedResponse = this.getCachedResponse(cacheKey);
     if (cachedResponse) {
+      console.log('AI Service - Using cached response:', cachedResponse);
       return cachedResponse;
     }
 
     await this.enforceRateLimit();
 
     const prompt = this.buildPrompt(fieldType, context);
+    console.log('AI Service - Built prompt:', prompt);
 
     for (let attempt = 1; attempt <= this.maxRetries; attempt++) {
       try {
@@ -74,31 +78,46 @@ class AIService {
 
     throw new Error('Failed to generate suggestion after multiple attempts');
   }
-
-  /**
-   * Builds the prompt for the AI based on field type
-   * @param fieldType - The type of field
-   * @param context - Additional context
-   * @returns The complete prompt
-   */
+  
   private buildPrompt(fieldType: string, context: string): string {
-    const prompts: Record<string, string> = {
-      financialSituation: `I am applying for social support assistance. Help me describe my current financial situation in a clear and honest way. Context: ${context}`,
-      employmentCircumstances: `I am applying for social support assistance. Help me describe my employment circumstances and work situation. Context: ${context}`,
-      reasonForApplying: `I am applying for social support assistance. Help me write a compelling reason for why I need this financial assistance. Context: ${context}`
-    };
-
-    return prompts[fieldType] || `Help me write about ${fieldType}. Context: ${context}`;
+    // Check if context is a field label (empty textarea case)
+    const fieldLabels = ['Current Financial Situation', 'Employment Circumstances', 'Reason for Applying'];
+    
+    if (fieldLabels.includes(context)) {
+      // Empty textarea - use field label to generate new content
+      const prompts: Record<string, string> = {
+        financialSituation: `I am applying for social support assistance. Help me write a clear and honest description about my current financial situation. Make it compelling and detailed.`,
+        employmentCircumstances: `I am applying for social support assistance. Help me write a clear and honest description about my employment circumstances and work situation. Make it compelling and detailed.`,
+        reasonForApplying: `I am applying for social support assistance. Help me write a compelling reason for why I need this financial assistance. Make it clear, honest, and detailed.`
+      };
+      return prompts[fieldType] || `Help me write about ${context}. Make it clear, honest, and detailed.`;
+    } else {
+      // User has typed something - send ONLY their text
+      return context;
+    }
   }
-
-  /**
-   * Makes a request to the OpenAI API
-   * @param prompt - The prompt to send
-   * @returns API response
-   */
+  
   private async makeRequest(prompt: string): Promise<OpenAIResponse> {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), this.timeout);
+
+    const requestBody = {
+      model: this.model,
+      messages: [
+        {
+          role: 'system',
+          content: 'You are a helpful assistant that helps people write clear, honest, and compelling descriptions for social support applications. Keep responses concise but detailed enough to be meaningful.'
+        },
+        {
+          role: 'user',
+          content: prompt
+        }
+      ],
+      max_tokens: 300,
+      temperature: 0.7
+    };
+
+    console.log('AI Service - Making API request with body:', JSON.stringify(requestBody, null, 2));
 
     try {
       const response = await fetch(this.baseURL, {
@@ -107,21 +126,7 @@ class AIService {
           'Authorization': `Bearer ${this.apiKey}`,
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-          model: this.model,
-          messages: [
-            {
-              role: 'system',
-              content: 'You are a helpful assistant that helps people write clear, honest, and compelling descriptions for social support applications. Keep responses concise but detailed enough to be meaningful.'
-            },
-            {
-              role: 'user',
-              content: prompt
-            }
-          ],
-          max_tokens: 300,
-          temperature: 0.7
-        }),
+        body: JSON.stringify(requestBody),
         signal: controller.signal
       });
 
@@ -144,7 +149,7 @@ class AIService {
 
   private getCachedResponse(cacheKey: string): string | null {
     const cached = this.requestCache[cacheKey];
-    if (cached && Date.now() - cached.timestamp < 300000) { // 5 minutes cache
+    if (cached && Date.now() - cached.timestamp < 300000) {
       return cached.response;
     }
     return null;
@@ -202,11 +207,7 @@ class AIService {
     
     return new Error(`Failed to generate suggestion after ${attempt} attempts. Please try again.`);
   }
-
-  /**
-   * Validates if the AI service is properly configured
-   * @returns True if service is ready
-   */
+  
   isReady(): boolean {
     return !!this.apiKey;
   }
