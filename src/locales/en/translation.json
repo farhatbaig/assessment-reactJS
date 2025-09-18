@@ -117,5 +117,17 @@
     "ae": "United Arab Emirates",
     "pk": "Pakistan",
     "in": "India"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "description": "We apologize for the inconvenience. An unexpected error has occurred.",
+    "errorId": "Error ID",
+    "retry": "Try Again",
+    "reload": "Reload Page",
+    "details": "Error Details",
+    "stackTrace": "Stack Trace",
+    "componentStack": "Component Stack",
+    "copyDetails": "Copy Error Details",
+    "help": "If this problem persists, please contact support with the Error ID above."
   }
 }

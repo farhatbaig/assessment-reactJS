@@ -42,6 +42,7 @@ export const PersonalInfoStep: React.FC<PersonalInfoStepProps> = ({ onNext }) =>
 
   const genderOptions = getTranslatedOptions(FORM_OPTIONS.GENDER, t);
   const countryOptions = getTranslatedOptions(FORM_OPTIONS.COUNTRY_OPTIONS, t);
+  // throw new Error('Simulated error in PersonalInfoStep component');
   return (
     <BaseFormStep
       stepNumber={1}
